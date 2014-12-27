@@ -1,6 +1,5 @@
-import numpy as np
-import matplotlib.pyplot as plt
 from scipy import interpolate
+import numpy as np
 
 class Load:
   def __init__(self):
@@ -16,12 +15,8 @@ class Load:
   def intpdata(self, x):
     return self.intpn(x), self.intpk(x);
 if __name__ == '__main__':
-  int_data = Load();
- 
-  new = np.arange(0.21, 1.3, 0.01);
-  n, k = int_data.intpdata(new);
-
-  plt.plot(new, n,'go')
-
-  plt.show()
+  print '''
+This is a class to interpolate the data in a file
+that gives the output in a desired position.
+''' 
 
