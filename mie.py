@@ -1,24 +1,29 @@
 from pymiecoated import Mie
-from numpy import pi
+import numpy as np
 import matplotlib.pyplot as plt
 from load import Load
 
-intp_data = Load();
-'print intpdata(0.3)'
+class Mie_class:
+  def __init__(self):
+    self.intp_data = Load();
 
-a = 0.8;
-wl = [];
-qsca = [];
-mie = Mie();
+  def mie(self, a = 0.3):
+    qsca = [];
+    qabs = [];
+    qext = [];
+    mie = Mie();
 
-for i in range(210, 1200):
-  wave_length = i*0.01;
-  mie.x = a * 2*pi/wave_length;
-  n, k = intp_data.intpdata(0.01*i);
-  mie.m = complex(n, k);
+    wl = np.arange(0.21, 1.2, .001);
 
-  wl.append(i);
-  qsca.append(mie.qext());
+    n_cu, k_cu, n_w, k_w = self.intp_data.intpdata(wl);
 
-plt.plot(wl, qsca)
-plt.show()
+    for i in range(len(wl)):
+      mie.x = a * 2*np.pi/wl[i];
+      mie.m = complex(n_cu[i], k_cu[i]);
+      mie.y = 3 * a * 2*np.pi/wl[i];
+      mie.m2 = complex(n_w[i], k_w[i]);
+      qsca.append(mie.qsca());
+      qabs.append(mie.qabs());
+      qext.append(mie.qb());
+
+    return wl, qsca, qabs, qext;
