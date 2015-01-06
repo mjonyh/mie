@@ -8,6 +8,7 @@ class Load:
     self.wl = self.data_cu[:,0];
     self.n = self.data_cu[:,1];
     self.k = self.data_cu[:,2];
+    'print self.n, self.n/1.33'
 
     self.intpn = interpolate.interp1d(self.wl,self.n);
     self.intpk = interpolate.interp1d(self.wl,self.k);

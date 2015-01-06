@@ -19,9 +19,14 @@ class Mie_class:
 
     for i in range(len(wl)):
       mie.x = a * 2*np.pi/wl[i];
-      mie.m = complex(n_cu[i], k_cu[i]);
+      temp_n = n_cu[i]/n_w[i];
+      temp_k = k_cu[i]+k_w[i];
+      'print temp_n, temp_k'
+      mie.m = complex(temp_n, temp_k);
+      '''
       mie.y = 3 * a * 2*np.pi/wl[i];
       mie.m2 = complex(n_w[i], k_w[i]);
+      '''
       qsca.append(mie.qsca());
       qabs.append(mie.qabs());
       qext.append(mie.qb());
